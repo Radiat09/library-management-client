@@ -1,17 +1,28 @@
 import PropTypes from "prop-types";
+import Rating from "react-rating";
 
 const Book = ({ book }) => {
   console.log(book);
   return (
-    <div className="card card-side rounded-none shadow-2xl border bg-base-100 ">
-      <figure>
-        <img src={book?.photo} alt="Movie" />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">{book?.bookName}</h2>
+    <div className="card card-side rounded-none shadow-2xl md:h-72 w-full bg-base-100 ">
+      <img src={book?.photoUrl} className="h-full w-28 md:w-40" alt="Movie" />
+      <div className="p-2 flex flex-col justify-between font-medium space-y-2">
+        <h2 className="card-title font-bold">{book?.bookName}</h2>
+        <h4 className="text-lg">By:{book.authorName}</h4>
         <p>Stock: {book?.quantity}</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Watch</button>
+        <div className="flex flex-col">
+          <span>Ratings:</span>
+          <Rating
+            className="text-xs md:whitespace-nowrap"
+            initialRating={book?.rating}
+            readonly
+          />
+        </div>
+
+        <div className="card-actions bottom-0">
+          <button className="btn btn-secondary btn-outline rounded-none">
+            Details
+          </button>
         </div>
       </div>
     </div>
