@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const CategoryCard = ({ cate }) => {
   return (
@@ -13,9 +14,11 @@ const CategoryCard = ({ cate }) => {
       <div className="card-body">
         <h2 className="text-2xl font-bold text-center">{cate?.category}</h2>
         <div className="card-actions justify-center">
-          <button className="btn btn-secondary btn-outline rounded-none w-full font-semibold ">
-            See Library
-          </button>
+          <Link to={`/category/${cate?.category}`}>
+            <button className="btn btn-secondary btn-outline rounded-none w-full font-semibold ">
+              See Library
+            </button>
+          </Link>
         </div>
       </div>
     </div>

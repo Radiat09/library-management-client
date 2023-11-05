@@ -1,45 +1,21 @@
 import { useForm } from "react-hook-form";
 import Container from "../../components/ui/Container";
-import { useState } from "react";
 import useAxios from "../../hooks/useAxios";
-import axios from "axios";
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
 
 const AddBooks = () => {
-  const [bookName, setBookname] = useState("");
-  const [authorName, setAuthorname] = useState("");
-  const [category, setCategory] = useState("");
-  const [quantity, setQuantity] = useState(0);
-  const [rating, setRating] = useState(0);
-  const [photoUrl, setPhotoUrl] = useState("");
-  const [description, setDescription] = useState("");
   const { register, handleSubmit } = useForm();
   const axi = useAxios();
   const onSubmit = async (data) => {
-    // setBookname(data.bookname);
-    // setAuthorname(data.authorname);
-    // setCategory(data.category);
-    // setQuantity(data.quantity);
-    // setRating(data.rating);
-    // setPhotoUrl(data.photo);
-    // setDescription(data.description);
     const bookName = data.bookName;
     const authorName = data.authorName;
     const category = data.category;
     const quantity = data.quantity;
     const rating = data.rating;
-    const photoUrl = data.photoUrl;
-    const description = data.descriptio;
-    // console.log(
-    //   bookName,
-    //   authorName,
-    //   category,
-    //   quantity,
-    //   rating,
-    //   photoUrl,
-    //   description
-    // );
-    // console.log(data);
+    const photoUrl = data.photo;
+    const description = data.description;
+
     const book = {
       bookName,
       authorName,
@@ -62,6 +38,15 @@ const AddBooks = () => {
       console.log(err);
     }
   };
+
+  const getCategories = async () => {
+    const res = await axi.get("/categories?query=category");
+    return res;
+  };
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
   return (
     <Container>
       <div className="min-h-[70vh]  my-40">
@@ -110,9 +95,14 @@ const AddBooks = () => {
                       className="select select-bordered w-full p-3 border-none "
                       {...register("category")}
                     >
-                      <option value="female">female</option>
+                      {categories?.data.map((cat, idx) => (
+                        <option key={idx} value={cat.category}>
+                          {cat.category}
+                        </option>
+                      ))}
+                      {/* <option value="female">female</option>
                       <option value="male">male</option>
-                      <option value="other">other</option>
+                      <option value="other">other</option> */}
                     </select>
                   </div>
                 </div>

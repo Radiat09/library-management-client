@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import AllBooks from "../page/AllBooks";
 import BorrowedBooks from "../page/BorrowedBooks";
 import AddBooks from "../page/AddBooks/AddBooks";
+import CategoriesS from "../page/CategoriesS/CategoriesS";
 // import useAuth from "../hooks/useAuth";
 
 // const { user } = useAuth();
@@ -33,6 +34,10 @@ const routes = createBrowserRouter([
       {
         path: "borrowedbooks",
         element: <BorrowedBooks></BorrowedBooks>,
+      },
+      {
+        path: "/category/:name",
+        element: <CategoriesS></CategoriesS>,
       },
     ],
   },

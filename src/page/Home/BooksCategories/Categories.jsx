@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { Vortex } from "react-loader-spinner";
 import CategoryCard from "./CategoryCard";
 import useAxios from "../../../hooks/useAxios";
