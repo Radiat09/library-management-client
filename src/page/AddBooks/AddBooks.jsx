@@ -3,6 +3,7 @@ import Container from "../../components/ui/Container";
 import { useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AddBooks = () => {
   const [bookName, setBookname] = useState("");
@@ -49,9 +50,13 @@ const AddBooks = () => {
       description,
     };
     // console.log(book);
+    const toastId = toast.loading("Adding...");
     try {
       axi.post("/books", book).then((res) => {
-        console.log(res);
+        console.log(res.status);
+        if (res.status === 200) {
+          toast.success("Added", { id: toastId });
+        }
       });
     } catch (err) {
       console.log(err);

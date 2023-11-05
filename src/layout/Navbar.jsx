@@ -1,10 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 // import useAuth from '../../hooks/useAuth';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
-  console.log(user);
+  // console.log(user);
   return (
     <div className=" w-full max-w-[1200px] px-[25px] mx-auto">
       <div className="flex-none lg:hidden">
@@ -29,7 +29,9 @@ const Navbar = () => {
         </label>
       </div>
       <div className="flex-1 text-4xl font-extrabold">
-        <span className="text-red-500">Livaro</span> Li.
+        <Link to="/">
+          <span className="text-red-500">Livaro</span> Li.
+        </Link>
       </div>
       <div className="flex-none hidden lg:block">
         <div className="flex items-center gap-4">

@@ -2,10 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Vortex } from "react-loader-spinner";
 import CategoryCard from "./CategoryCard";
+import useAxios from "../../../hooks/useAxios";
 
 const Categories = () => {
+  const axi = useAxios();
   const getCategories = async () => {
-    const res = await axios.get("./category.json");
+    const res = await axi.get("/categories");
     return res;
   };
   const { data: categories, isLoading } = useQuery({
