@@ -6,11 +6,12 @@ import Container from "../../components/ui/Container";
 import Rating from "react-rating";
 import useAuth from "../../hooks/useAuth";
 import moment from "moment/moment";
+import axios from "axios";
 
 const BookDetails = () => {
   const { user } = useAuth();
   const [book, setBook] = useState({});
-  const [quantity, setQuantity] = useState(null);
+  const [currQuantity, setQuantity] = useState(null);
   const axi = useAxios();
   const { id } = useParams();
   useEffect(() => {
@@ -21,9 +22,9 @@ const BookDetails = () => {
     });
   }, [id, axi]);
 
-  console.log(quantity);
+  console.log(currQuantity);
   const handleSubmit = (e) => {
-    const newQuan = parseInt(quantity) - 1; //need to update update
+    const quantity = parseInt(currQuantity) - 1; //need to update update
     //these will be post method
     const displayName = e.target.displayName.value;
     const userEmail = e.target.email.value;
@@ -32,16 +33,16 @@ const BookDetails = () => {
     const category = book.category;
     const bookName = book.bookName;
     console.log(
-      newQuan,
       displayName,
       userEmail,
       returnDate,
       BorrowedDate,
       category,
-      bookName
+      bookName,
+      id
     );
+
     const borrowedBooks = {
-      newQuan,
       displayName,
       userEmail,
       returnDate,
@@ -49,11 +50,11 @@ const BookDetails = () => {
       category,
       bookName,
     };
-
-    axi.patch(`/books/${id}`, newQuan).then((res) => {
+    axi.patch(`/books/${id}`, { quantity: quantity }).then((res) => {
       console.log(res);
     });
-    //   // console.log(quantity);
+
+    axi.post();
   };
 
   return (
@@ -88,7 +89,8 @@ const BookDetails = () => {
               Read
             </button>
             <button
-              className="btn btn-secondary btn-outline w-4/5 rounded-none"
+              disabled={currQuantity === 0}
+              className="btn btn-secondary btn-outline w-4/5 rounded-none "
               onClick={() => document.getElementById("my_modal_5").showModal()}
             >
               Borrow
