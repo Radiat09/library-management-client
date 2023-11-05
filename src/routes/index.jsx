@@ -9,6 +9,8 @@ import AllBooks from "../page/AllBooks";
 import BorrowedBooks from "../page/BorrowedBooks";
 import AddBooks from "../page/AddBooks/AddBooks";
 import CategoriesS from "../page/CategoriesS/CategoriesS";
+import BookDetails from "../page/BookDetails/BookDetails";
+import axios from "axios";
 // import useAuth from "../hooks/useAuth";
 
 // const { user } = useAuth();
@@ -38,6 +40,10 @@ const routes = createBrowserRouter([
       {
         path: "/category/:name",
         element: <CategoriesS></CategoriesS>,
+      },
+      {
+        path: "/:category/:id",
+        element: <BookDetails></BookDetails>,
       },
     ],
   },

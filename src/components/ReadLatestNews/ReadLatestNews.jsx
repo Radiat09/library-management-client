@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
 import { Vortex } from "react-loader-spinner";
 import ReadLatestNewsCard from "./ReadLatestNewsCard";
 import { FaArrowRight } from "react-icons/fa";

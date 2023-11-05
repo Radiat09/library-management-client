@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const CategoryCard = ({ cate }) => {
+  // console.log(cate);
   return (
     <div className="card card-compact rounded-none bg-base-100 shadow-xl">
       <figure>

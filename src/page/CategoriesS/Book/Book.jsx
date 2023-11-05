@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import Rating from "react-rating";
+import { Link } from "react-router-dom";
 
 const Book = ({ book }) => {
-  console.log(book);
+  console.log(book._id);
   return (
     <div className="card card-side rounded-none shadow-2xl md:h-72 w-full bg-base-100 ">
       <img src={book?.photoUrl} className="h-full w-28 md:w-40" alt="Movie" />
@@ -19,10 +20,12 @@ const Book = ({ book }) => {
           />
         </div>
 
-        <div className="card-actions bottom-0">
-          <button className="btn btn-secondary btn-outline rounded-none">
-            Details
-          </button>
+        <div className="card-actions ">
+          <Link to={`/${book?.category}/${book._id}`}>
+            <button className="btn btn-secondary btn-outline rounded-none">
+              Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>

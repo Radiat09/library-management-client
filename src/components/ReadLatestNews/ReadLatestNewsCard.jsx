@@ -1,5 +1,6 @@
+import PropTypes from "prop-types";
 const ReadLatestNewsCard = ({ news }) => {
-  console.log(news);
+  // console.log(news);
   return (
     <div className="space-y-4">
       <img
@@ -13,4 +14,7 @@ const ReadLatestNewsCard = ({ news }) => {
   );
 };
 
+ReadLatestNewsCard.propTypes = {
+  news: PropTypes.object,
+};
 export default ReadLatestNewsCard;
