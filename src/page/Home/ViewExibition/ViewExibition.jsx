@@ -4,8 +4,8 @@ import exi3 from "../../../assets/images/felton_cityrewritten.jpg";
 const ViewExibition = () => {
   return (
     <div className="my-40">
-      <h2 className="text-5xl font-semibold border-l-8 border-red-600">
-        Read Latest News
+      <h2 className="text-5xl font-semibold border-l-8 border-red-600 pl-1">
+        Vistite Exibitions
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         <div>

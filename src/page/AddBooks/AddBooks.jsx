@@ -1,21 +1,49 @@
 import { useForm } from "react-hook-form";
 import Container from "../../components/ui/Container";
+import { useState } from "react";
 
 const AddBooks = () => {
+  const [bookName, setBookname] = useState("");
+  const [authorName, setAuthorname] = useState("");
+  const [category, setCategory] = useState("");
+  const [quantity, setQuantity] = useState(0);
+  const [rating, setRating] = useState(0);
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [description, setDescription] = useState("");
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    setBookname(data.bookname);
+    setAuthorname(data.authorname);
+    setCategory(data.category);
+    setQuantity(data.quantity);
+    setRating(data.rating);
+    setPhotoUrl(data.photo);
+    setDescription(data.description);
+    console.log(
+      bookName,
+      authorName,
+      category,
+      quantity,
+      rating,
+      photoUrl,
+      description
+    );
+    console.log(data);
+  };
   return (
     <Container>
       <div className="min-h-[70vh]  my-40">
-        <div className="bg-[#F4F3F0] rounded py-20 px-1 md:px-10 lg:px-32">
-          <h2 className=" text-5xl font-bold text-center mb-10">ADD A BOOK</h2>
+        <div className="bg-red-700  rounded py-20 px-1 md:px-10 lg:px-32">
+          <h2 className=" text-5xl font-bold text-center mb-10 text-white">
+            ADD A BOOK
+          </h2>
           <div>
             <form onSubmit={handleSubmit(onSubmit)} className="">
               <div className="flex flex-col md:flex-row gap-2">
                 <div className="flex-1 space-y-5">
                   <div className="">
                     <label className="label ">
-                      <span className="label-text text-xl font-semibold">
+                      <span className="label-text text-xl font-semibold text-white">
                         Book Name
                       </span>
                     </label>
@@ -28,7 +56,7 @@ const AddBooks = () => {
                   </div>
                   <div className="">
                     <label className="label">
-                      <span className="label-text text-xl font-semibold">
+                      <span className="label-text text-xl font-semibold text-white">
                         Author Name
                       </span>
                     </label>
@@ -41,7 +69,7 @@ const AddBooks = () => {
                   </div>
                   <div className="">
                     <label className="label">
-                      <span className="label-text text-xl font-semibold">
+                      <span className="label-text text-xl font-semibold text-white">
                         Book Category
                       </span>
                     </label>
@@ -59,7 +87,7 @@ const AddBooks = () => {
                 <div className="flex-1  space-y-5">
                   <div className="">
                     <label className="label ">
-                      <span className="label-text text-xl font-semibold">
+                      <span className="label-text text-xl font-semibold text-white">
                         Quantity of the book
                       </span>
                     </label>
@@ -72,7 +100,7 @@ const AddBooks = () => {
                   </div>
                   <div className="">
                     <label className="label">
-                      <span className="label-text text-xl font-semibold">
+                      <span className="label-text text-xl font-semibold text-white">
                         Rating
                       </span>
                     </label>
@@ -85,12 +113,12 @@ const AddBooks = () => {
                   </div>
                   <div className="">
                     <label className="label">
-                      <span className="label-text text-xl font-semibold">
+                      <span className="label-text text-xl font-semibold text-white">
                         Short description
                       </span>
                     </label>
                     <input
-                      {...register("rating")}
+                      {...register("description")}
                       type="text"
                       placeholder="Enter short description"
                       className="w-full  p-1 md:p-3 rounded-md"
@@ -101,8 +129,8 @@ const AddBooks = () => {
               <div className="mt-5">
                 <div className="mb-10">
                   <label className="label">
-                    <span className="label-text text-xl font-semibold">
-                      Product Photo
+                    <span className="label-text text-xl font-semibold text-white">
+                      Photo
                     </span>
                   </label>
                   <input
@@ -115,7 +143,7 @@ const AddBooks = () => {
                 <input
                   type="submit"
                   value="Add Book"
-                  className="w-full border-2  bg-red-500 text-white hover:bg-white hover:text-red-500 hover:border-red-500 py-3  text-2xl font-fontRancho rounded-md cursor-pointer transition-all"
+                  className="w-full border-2  bg-red-500 text-white hover:bg-white hover:text-red-500 hover:border-red-500 py-3  text-2xl font-bold rounded-none cursor-pointer transition-all"
                 />
               </div>
             </form>

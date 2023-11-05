@@ -38,8 +38,8 @@ const Navbar = () => {
             to="/"
             className={({ isActive }) =>
               isActive
-                ? "btn text-red-500 border-red-500 btn-sm"
-                : "btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm "
+                ? "btn text-red-500 border-red-500 hover:text-red-500 hover:border-red-500 btn-sm rounded-none"
+                : "btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm  rounded-none"
             }
           >
             Home
@@ -48,8 +48,8 @@ const Navbar = () => {
             to="/addbooks"
             className={({ isActive }) =>
               isActive
-                ? "btn text-red-500 border-red-500 btn-sm"
-                : "btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm "
+                ? "btn text-red-500 border-red-500 hover:text-red-500 hover:border-red-500 btn-sm rounded-none"
+                : "btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm rounded-none"
             }
           >
             Add Books
@@ -58,8 +58,8 @@ const Navbar = () => {
             to="/allbooks"
             className={({ isActive }) =>
               isActive
-                ? "btn text-red-500 border-red-500 btn-sm"
-                : "btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm "
+                ? "btn text-red-500 border-red-500 hover:text-red-500 hover:border-red-500 btn-sm rounded-none"
+                : "btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm  rounded-none"
             }
           >
             All Books
@@ -68,8 +68,8 @@ const Navbar = () => {
             to="/borrowedbooks"
             className={({ isActive }) =>
               isActive
-                ? "btn text-red-500 border-red-500 btn-sm"
-                : "btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm "
+                ? "btn text-red-500 border-red-500 hover:text-red-500 hover:border-red-500 btn-sm rounded-none"
+                : "btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm  rounded-none"
             }
           >
             Borrowrd Books
@@ -95,7 +95,7 @@ const Navbar = () => {
                   </li> */}
                   <li>
                     <button
-                      className="btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm"
+                      className="btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm rounded-none"
                       onClick={logout}
                     >
                       Logout
@@ -108,13 +108,13 @@ const Navbar = () => {
             <div className="navbar-end flex items-center gap-4 ">
               <NavLink
                 to="/login"
-                className="btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm"
+                className="btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm rounded-none"
               >
                 Login
               </NavLink>
               <NavLink
                 to="register"
-                className="btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm"
+                className="btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm rounded-none"
               >
                 Register
               </NavLink>
