@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
+import Footer from "../components/layout/Footer";
 
 const MainLayout = ({ children }) => {
   return (
@@ -13,6 +14,7 @@ const MainLayout = ({ children }) => {
         </div>
         {/* Page content here */}
         {children}
+        <Footer></Footer>
       </div>
       <div className="drawer-side">
         <label

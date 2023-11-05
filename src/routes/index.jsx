@@ -5,9 +5,9 @@ import Register from "../page/Register";
 
 import Home from "../page/Home/Home/Home";
 import PrivateRoute from "./PrivateRoute";
-import AddBooks from "../page/AddBooks";
 import AllBooks from "../page/AllBooks";
 import BorrowedBooks from "../page/BorrowedBooks";
+import AddBooks from "../page/AddBooks/AddBooks";
 // import useAuth from "../hooks/useAuth";
 
 // const { user } = useAuth();
