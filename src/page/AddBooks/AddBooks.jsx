@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import Container from "../../components/ui/Container";
 import { useState } from "react";
+import useAxios from "../../hooks/useAxios";
+import axios from "axios";
 
 const AddBooks = () => {
   const [bookName, setBookname] = useState("");
@@ -11,24 +13,49 @@ const AddBooks = () => {
   const [photoUrl, setPhotoUrl] = useState("");
   const [description, setDescription] = useState("");
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    setBookname(data.bookname);
-    setAuthorname(data.authorname);
-    setCategory(data.category);
-    setQuantity(data.quantity);
-    setRating(data.rating);
-    setPhotoUrl(data.photo);
-    setDescription(data.description);
-    console.log(
+  const axi = useAxios();
+  const onSubmit = async (data) => {
+    // setBookname(data.bookname);
+    // setAuthorname(data.authorname);
+    // setCategory(data.category);
+    // setQuantity(data.quantity);
+    // setRating(data.rating);
+    // setPhotoUrl(data.photo);
+    // setDescription(data.description);
+    const bookName = data.bookName;
+    const authorName = data.authorName;
+    const category = data.category;
+    const quantity = data.quantity;
+    const rating = data.rating;
+    const photoUrl = data.photoUrl;
+    const description = data.descriptio;
+    // console.log(
+    //   bookName,
+    //   authorName,
+    //   category,
+    //   quantity,
+    //   rating,
+    //   photoUrl,
+    //   description
+    // );
+    // console.log(data);
+    const book = {
       bookName,
       authorName,
       category,
       quantity,
       rating,
       photoUrl,
-      description
-    );
-    console.log(data);
+      description,
+    };
+    // console.log(book);
+    try {
+      axi.post("/books", book).then((res) => {
+        console.log(res);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <Container>
