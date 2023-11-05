@@ -11,7 +11,9 @@ const Register = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { createUser, user } = useAuth();
+  const [username, setUsername] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("");
+  const { createUser, user, updateUser } = useAuth();
   const passwordValidator = /(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-])/;
   // console.log(user);
   const {
@@ -22,8 +24,11 @@ const Register = () => {
   const onSubmit = async (data) => {
     setEmail(data.email);
     setPassword(data.password);
+    setUsername(data.username);
+    setPhotoUrl(data.photo);
+
     // console.log(email, password);
-    console.log(data.username, data.photo);
+    console.log(username, photoUrl);
 
     if (password.length < 6) {
       return toast.error("Password must be 6 characters long");
@@ -39,6 +44,17 @@ const Register = () => {
 
     try {
       await createUser(email, password);
+      await updateUser(username, photoUrl)
+        .then(() => {
+          // Profile updated!
+          toast.success("Profile Updated");
+          // ...
+        })
+        .catch((error) => {
+          // An error occurred
+          toast.error(error);
+          // ...
+        });
       toast.success("Logged in...", { id: toastId });
       navigate("/");
     } catch (err) {
