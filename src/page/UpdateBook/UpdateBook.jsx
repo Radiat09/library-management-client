@@ -3,8 +3,11 @@ import Container from "../../components/ui/Container";
 import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 const UpdateBook = () => {
+  const { id } = useParams();
+  // console.log(id);
   const { register, handleSubmit } = useForm();
   const axi = useAxios();
   const onSubmit = async (data) => {

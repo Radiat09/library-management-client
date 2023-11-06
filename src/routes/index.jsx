@@ -70,7 +70,7 @@ const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/updateBook",
+        path: "/updateBook/:id",
         element: (
           <PrivateRoute>
             <UpdateBook></UpdateBook>
