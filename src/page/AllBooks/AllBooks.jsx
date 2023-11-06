@@ -48,7 +48,7 @@ const AllBooks = () => {
               onClick={() => setFilter(true)}
               className="btn btn-accent text-white btn-sm"
             >
-              Sort by Quantity
+              Sort by In Stock
             </button>
           </div>
           {filterV ? (

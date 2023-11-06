@@ -4,20 +4,33 @@ import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const UpdateBook = () => {
-  const { id } = useParams();
-  // console.log(id);
-  const { register, handleSubmit } = useForm();
   const axi = useAxios();
-  const onSubmit = async (data) => {
-    const bookName = data.bookName;
-    const authorName = data.authorName;
-    const category = data.category;
-    const quantity = data.quantity;
-    const rating = data.rating;
-    const photoUrl = data.photo;
-    const description = data.description;
+  const { id } = useParams();
+  const { register, handleSubmit } = useForm();
+  // console.log(id);
+  const [defaultBookData, setDefaultBookData] = useState([]);
+
+  useEffect(() => {
+    axi.get(`/books/${id}`).then((res) => {
+      setDefaultBookData(res.data);
+    });
+  }, [axi, id]);
+
+  // console.log(defaultBookData);
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const bookName = form.bookName.value;
+    const authorName = form.authorName.value;
+    const category = form.category.value;
+    const quantity = form.quantity.value;
+    const rating = form.rating.value;
+    const photoUrl = form.photo.value;
+    const description = form.description.value;
 
     const book = {
       bookName,
@@ -28,10 +41,10 @@ const UpdateBook = () => {
       photoUrl,
       description,
     };
-    // console.log(book);
+    console.log(book);
     const toastId = toast.loading("Adding...");
     try {
-      axi.post("/books", book).then((res) => {
+      axi.put("/books", book).then((res) => {
         console.log(res.status);
         if (res.status === 200) {
           toast.success("Added", { id: toastId });
@@ -50,15 +63,16 @@ const UpdateBook = () => {
     queryKey: ["categories"],
     queryFn: getCategories,
   });
+
   return (
     <Container>
       <div className="min-h-[70vh]  my-40">
-        <div className="bg-red-700  rounded py-20 px-1 md:px-10 lg:px-32">
-          <h2 className=" text-5xl font-bold text-center mb-10 text-white">
+        <div className="bg-red-700  rounded px-3 py-20  md:px-10 lg:px-32">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-10 text-white">
             Update A BOOK
           </h2>
           <div>
-            <form onSubmit={handleSubmit(onSubmit)} className="">
+            <form onSubmit={handleUpdate} className="">
               <div className="flex flex-col md:flex-row gap-2">
                 <div className="flex-1 space-y-5">
                   <div className="">
@@ -68,7 +82,8 @@ const UpdateBook = () => {
                       </span>
                     </label>
                     <input
-                      {...register("bookName")}
+                      defaultValue={defaultBookData?.bookName}
+                      name="bookName"
                       type="text"
                       placeholder="Enter book name"
                       className="w-full  p-3 rounded-md"
@@ -81,7 +96,8 @@ const UpdateBook = () => {
                       </span>
                     </label>
                     <input
-                      {...register("authorName")}
+                      defaultValue={defaultBookData?.authorName}
+                      name="authorName"
                       type="text"
                       placeholder="Enter Author name"
                       className="w-full  p-3 rounded-md"
@@ -94,22 +110,19 @@ const UpdateBook = () => {
                       </span>
                     </label>
                     <select
-                      name="type"
+                      defaultValue={defaultBookData?.category}
                       className="select select-bordered w-full p-3 border-none "
-                      {...register("category")}
+                      name="category"
                     >
                       {categories?.data.map((cat, idx) => (
                         <option key={idx} value={cat.category}>
                           {cat.category}
                         </option>
                       ))}
-                      {/* <option value="female">female</option>
-                      <option value="male">male</option>
-                      <option value="other">other</option> */}
                     </select>
                   </div>
                 </div>
-                <div className="flex-1  space-y-5">
+                <div className="flex-1 space-y-5">
                   <div className="">
                     <label className="label ">
                       <span className="label-text text-xl font-semibold text-white">
@@ -117,7 +130,8 @@ const UpdateBook = () => {
                       </span>
                     </label>
                     <input
-                      {...register("quantity")}
+                      defaultValue={defaultBookData?.quantity}
+                      name="quantity"
                       type="text"
                       placeholder="Enter book quantity"
                       className="w-full  p-3 rounded-md"
@@ -130,7 +144,8 @@ const UpdateBook = () => {
                       </span>
                     </label>
                     <input
-                      {...register("rating")}
+                      defaultValue={defaultBookData?.rating}
+                      name="rating"
                       type="text"
                       placeholder="Enter rating"
                       className="w-full  p-3 rounded-md"
@@ -143,10 +158,11 @@ const UpdateBook = () => {
                       </span>
                     </label>
                     <input
-                      {...register("description")}
+                      defaultValue={defaultBookData?.description}
+                      name="description"
                       type="text"
                       placeholder="Enter short description"
-                      className="w-full  p-1 md:p-3 rounded-md"
+                      className="w-full  p-3 rounded-md"
                     />
                   </div>
                 </div>
@@ -159,15 +175,16 @@ const UpdateBook = () => {
                     </span>
                   </label>
                   <input
-                    {...register("photo")}
+                    defaultValue={defaultBookData?.photoUrl}
+                    name="photo"
                     type="text"
                     placeholder="Enter photo URL"
-                    className="w-full  p-1 md:p-3 rounded-md"
+                    className="w-full  p-3 rounded-md"
                   />
                 </div>
                 <input
                   type="submit"
-                  value="Add Book"
+                  value="Update Book"
                   className="w-full border-2  bg-red-500 text-white hover:bg-white hover:text-red-500 hover:border-red-500 py-3  text-2xl font-bold rounded-none cursor-pointer transition-all"
                 />
               </div>
