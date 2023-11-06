@@ -16,7 +16,7 @@ const CategoriesS = () => {
     queryKey: ["books"],
     queryFn: getBooks,
   });
-  console.log(data);
+  // console.log(data);
 
   return (
     <Container>

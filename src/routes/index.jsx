@@ -2,19 +2,15 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Login from "../page/Login";
 import Register from "../page/Register";
-
-import Home from "../page/Home/Home/Home";
+import AllBooks from "../page/AllBooks/AllBooks";
 import PrivateRoute from "./PrivateRoute";
-import AllBooks from "../page/AllBooks";
-import BorrowedBooks from "../page/BorrowedBooks";
+import Home from "../page/Home/Home/Home";
+import BorrowedBooks from "../page/BorrowedBooks/BorrowedBooks";
 import AddBooks from "../page/AddBooks/AddBooks";
 import CategoriesS from "../page/CategoriesS/CategoriesS";
 import BookDetails from "../page/BookDetails/BookDetails";
-import axios from "axios";
-// import useAuth from "../hooks/useAuth";
-
-// const { user } = useAuth();
-// console.log(user);
+import ReadBook from "../page/ReadBook/ReadBook";
+import UpdateBook from "../page/UpdateBook/UpdateBook";
 
 const routes = createBrowserRouter([
   {
@@ -27,23 +23,59 @@ const routes = createBrowserRouter([
       },
       {
         path: "addbooks",
-        element: <AddBooks></AddBooks>,
+        element: (
+          <PrivateRoute>
+            <AddBooks></AddBooks>
+          </PrivateRoute>
+        ),
       },
       {
         path: "allbooks",
-        element: <AllBooks></AllBooks>,
+        element: (
+          <PrivateRoute>
+            <AllBooks></AllBooks>
+          </PrivateRoute>
+        ),
       },
       {
         path: "borrowedbooks",
-        element: <BorrowedBooks></BorrowedBooks>,
+        element: (
+          <PrivateRoute>
+            <BorrowedBooks></BorrowedBooks>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/category/:name",
-        element: <CategoriesS></CategoriesS>,
+        element: (
+          <PrivateRoute>
+            <CategoriesS></CategoriesS>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/:category/:id",
-        element: <BookDetails></BookDetails>,
+        element: (
+          <PrivateRoute>
+            <BookDetails></BookDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/:category/:id/read",
+        element: (
+          <PrivateRoute>
+            <ReadBook></ReadBook>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/updateBook",
+        element: (
+          <PrivateRoute>
+            <UpdateBook></UpdateBook>
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -55,16 +87,6 @@ const routes = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
-  // {
-  //   path: "/admin",
-  //   element: <AdminLayout />,
-  //   children: [
-  //     {
-  //       index: true,
-  //       element: <AddService />,
-  //     },
-  //   ],
-  // },
 ]);
 
 export default routes;

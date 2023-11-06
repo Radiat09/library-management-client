@@ -13,7 +13,7 @@ const MainLayout = ({ children }) => {
           <Navbar />
         </div>
         {/* Page content here */}
-        {children}
+        <div className="min-h-[70vh]">{children}</div>
         <Footer></Footer>
       </div>
       <div className="drawer-side">

@@ -3,7 +3,7 @@ import Rating from "react-rating";
 import { Link } from "react-router-dom";
 
 const Book = ({ book }) => {
-  console.log(book._id);
+  // console.log(book._id);
   return (
     <div className="card card-side rounded-none shadow-2xl md:h-72 w-full bg-base-100 ">
       <img src={book?.photoUrl} className="h-full w-28 md:w-40" alt="Movie" />
