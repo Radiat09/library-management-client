@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 const UpdateBook = () => {
   const axi = useAxios();
   const { id } = useParams();
-  const { register, handleSubmit } = useForm();
   // console.log(id);
   const [defaultBookData, setDefaultBookData] = useState([]);
 
@@ -19,7 +18,7 @@ const UpdateBook = () => {
     });
   }, [axi, id]);
 
-  // console.log(defaultBookData);
+  console.log(defaultBookData);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -44,10 +43,10 @@ const UpdateBook = () => {
     console.log(book);
     const toastId = toast.loading("Adding...");
     try {
-      axi.put("/books", book).then((res) => {
-        console.log(res.status);
-        if (res.status === 200) {
-          toast.success("Added", { id: toastId });
+      axi.put(`/books/${id}`, book).then((res) => {
+        console.log(res);
+        if (res.data.modifiedCount > 1) {
+          toast.success("Updated", { id: toastId });
         }
       });
     } catch (err) {
