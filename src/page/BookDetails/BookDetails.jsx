@@ -12,17 +12,9 @@ import { useQuery } from "@tanstack/react-query";
 const BookDetails = () => {
   const [checkBook, setCheckBook] = useState(null);
   const { user } = useAuth();
-  // const [book, setBook] = useState({});
-
   const axi = useAxios();
   const { id } = useParams();
-  // useEffect(() => {
-  //   axi.get(`/books/${id}`).then((res) => {
-  //     // console.log(res.data);
-  //     setBook(res.data);
-  //     setQuantity(res.data?.quantity);
-  //   });
-  // }, [id, axi, currQuantity]);
+
   const [currQuantity, setQuantity] = useState(null);
   const { data: book, refetch } = useQuery({
     queryKey: ["singlebook"],
@@ -34,6 +26,17 @@ const BookDetails = () => {
     },
   });
 
+  // const { data: borrowBook } = useQuery({
+  //   queryKey: ["borrowSbook"],
+  //   queryFn: async () => {
+  //     const res = await axi.get(
+  //       `/borrowedbooks/check?email=${user?.email}&bookName=${book?.bookName}`
+  //     );
+  //     // console.log(res.data);
+  //     return res.data;
+  //   },
+  // });
+
   useEffect(() => {
     axi
       .get(
@@ -42,12 +45,10 @@ const BookDetails = () => {
       .then((res) => {
         setCheckBook(res?.data);
       });
-    // setQuantity(book?.quantity);
   }, [axi, book?.bookName, user?.email]);
-  // console.log(currQuantity);
 
   const handleSubmit = (e) => {
-    // console.log(checkBook);
+    console.log(checkBook);
     if (checkBook && checkBook.length > 0) {
       return toast.error("Can not borrow same book twich");
     }
@@ -83,6 +84,7 @@ const BookDetails = () => {
         });
         toast.success("Borrow Successfull");
         e.target.returnDate.value = "";
+        location.reload(true);
       }
     });
   };
