@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const CategoryCard = ({ cate }) => {
   // console.log(cate);
   return (
-    <div className="card card-compact rounded-none bg-base-100 shadow-xl">
+    <div className="card card-compact rounded-none bg-base-100 shadow-2xl">
       <figure>
         <img
           src={cate?.image}
@@ -16,7 +16,7 @@ const CategoryCard = ({ cate }) => {
         <h2 className="text-2xl font-bold text-center">{cate?.category}</h2>
         <div className="card-actions justify-center">
           <Link to={`/category/${cate?.category}`}>
-            <button className="btn btn-secondary btn-outline rounded-none w-full font-semibold ">
+            <button className="btn btn-outline text-red-600 border-red-600 hover:bg-red-600 hover:border-red-600 text-xl rounded-none">
               See Library
             </button>
           </Link>

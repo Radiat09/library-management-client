@@ -6,10 +6,10 @@ import Container from "../../components/ui/Container";
 import Rating from "react-rating";
 import useAuth from "../../hooks/useAuth";
 import moment from "moment/moment";
-import axios from "axios";
 import toast from "react-hot-toast";
 
 const BookDetails = () => {
+  const [checkBook, setCheckBook] = useState(null);
   const { user } = useAuth();
   const [book, setBook] = useState({});
   const [currQuantity, setQuantity] = useState(null);
@@ -24,7 +24,19 @@ const BookDetails = () => {
   }, [id, axi]);
 
   // console.log(currQuantity);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    await axi
+      .get(
+        `/borrowedbooks/${id}?email=${user?.email}&bookName=${book?.bookName}`
+      )
+      .then((res) => {
+        setCheckBook(res?.data);
+      });
+
+    if (checkBook) {
+      return toast.error("Can not borrow same book twich");
+    }
+
     const quantity = parseInt(currQuantity) - 1; //need to update update
     //these will be post method
     const displayName = e.target.displayName.value;
@@ -47,12 +59,6 @@ const BookDetails = () => {
       oldId: id,
     };
 
-    // axi
-    //   .get(`/borrowedbooks/check?userEmail=${user?.email}&bookName=Fuckkk`)
-    //   .then((res) => {
-    //     console.log(res);
-    //   });
-
     axi.post("/borrowedbooks", borrowedBooks).then((res) => {
       // console.log(res);
       if (res.status === 200) {
@@ -60,11 +66,12 @@ const BookDetails = () => {
           console.log(res);
         });
         toast.success("Borrow Successfull");
+        e.target.returnDate.value = "";
       }
     });
   };
 
-  console.log(book);
+  // console.log(book);
   return (
     <Container>
       <div className="mb-40 mt-10">
@@ -139,6 +146,7 @@ const BookDetails = () => {
                       <div className="flex flex-col">
                         <label htmlFor="returnDate">Return date</label>
                         <input
+                          required
                           id="returnDate"
                           name="returnDate"
                           type="datetime-local"

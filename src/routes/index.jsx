@@ -11,11 +11,13 @@ import CategoriesS from "../page/CategoriesS/CategoriesS";
 import BookDetails from "../page/BookDetails/BookDetails";
 import ReadBook from "../page/ReadBook/ReadBook";
 import UpdateBook from "../page/UpdateBook/UpdateBook";
+import Error from "./Error";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <Error></Error>,
     children: [
       {
         index: true,
