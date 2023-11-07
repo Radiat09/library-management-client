@@ -7,36 +7,51 @@ import Rating from "react-rating";
 import useAuth from "../../hooks/useAuth";
 import moment from "moment/moment";
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
 
 const BookDetails = () => {
   const [checkBook, setCheckBook] = useState(null);
   const { user } = useAuth();
-  const [book, setBook] = useState({});
-  const [currQuantity, setQuantity] = useState(null);
+  // const [book, setBook] = useState({});
+
   const axi = useAxios();
   const { id } = useParams();
-  useEffect(() => {
-    axi.get(`/books/${id}`).then((res) => {
+  // useEffect(() => {
+  //   axi.get(`/books/${id}`).then((res) => {
+  //     // console.log(res.data);
+  //     setBook(res.data);
+  //     setQuantity(res.data?.quantity);
+  //   });
+  // }, [id, axi, currQuantity]);
+  const [currQuantity, setQuantity] = useState(null);
+  const { data: book, refetch } = useQuery({
+    queryKey: ["singlebook"],
+    queryFn: async () => {
+      const res = await axi.get(`/books/${id}`);
       // console.log(res.data);
-      setBook(res.data);
-      setQuantity(res.data?.quantity);
-    });
-  }, [id, axi]);
+      setQuantity(res.data.quantity);
+      return res.data;
+    },
+  });
 
-  // console.log(currQuantity);
-  const handleSubmit = async (e) => {
-    await axi
+  useEffect(() => {
+    axi
       .get(
-        `/borrowedbooks/${id}?email=${user?.email}&bookName=${book?.bookName}`
+        `/borrowedbooks/check?email=${user?.email}&bookName=${book?.bookName}`
       )
       .then((res) => {
         setCheckBook(res?.data);
       });
+    // setQuantity(book?.quantity);
+  }, [axi, book?.bookName, user?.email]);
+  // console.log(currQuantity);
 
-    if (checkBook) {
+  const handleSubmit = (e) => {
+    // console.log(checkBook);
+    if (checkBook && checkBook.length > 0) {
       return toast.error("Can not borrow same book twich");
     }
-
+    // console.log("This Book can be borrowed");
     const quantity = parseInt(currQuantity) - 1; //need to update update
     //these will be post method
     const displayName = e.target.displayName.value;
@@ -64,6 +79,7 @@ const BookDetails = () => {
       if (res.status === 200) {
         axi.patch(`/books/${id}`, { quantity: quantity }).then((res) => {
           console.log(res);
+          refetch();
         });
         toast.success("Borrow Successfull");
         e.target.returnDate.value = "";
@@ -85,19 +101,19 @@ const BookDetails = () => {
               Author: {book?.authorName}
             </h6>
             <p className="text-lg font-semibold">Category: {book?.category} </p>
-            <p className="text-lg font-semibold">Stock: {book.quantity}</p>
+            <p className="text-lg font-semibold">Stock: {book?.quantity}</p>
             <div className="flex gap-1">
               <span className="text-lg font-semibold">Ratings:</span>
               <Rating
                 className="text-xs md:whitespace-nowrap"
-                initialRating={book.rating}
+                initialRating={book?.rating}
                 readonly
               />
             </div>
           </div>
           <div className="flex flex-col justify-start items-center gap-6 w-full md:col-span-2 lg:col-span-1">
             <Link
-              to={`/${book.category}/${book._id}/read`}
+              to={`/${book?.category}/${book?._id}/read`}
               className="btn btn-secondary btn-outline w-4/5 rounded-none mt-40"
             >
               <button>Read</button>
