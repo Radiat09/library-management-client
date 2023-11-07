@@ -10,7 +10,7 @@ const Login = () => {
   const [showHide, setShowHide] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, user } = useAuth();
+  const { login, user, googleLogin } = useAuth();
   const navigate = useNavigate();
   const passwordValidator = /(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-])/;
   const {
@@ -38,6 +38,16 @@ const Login = () => {
 
     try {
       await login(email, password);
+      toast.success("Logged in...", { id: toastId });
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message, { id: toastId });
+    }
+  };
+  const handleGoogleLogin = async () => {
+    const toastId = toast.loading("Logging in..");
+    try {
+      await googleLogin();
       toast.success("Logged in...", { id: toastId });
       navigate("/");
     } catch (err) {
@@ -105,7 +115,10 @@ const Login = () => {
           </div>
           <div className="divider w-4/5 mx-auto">OR</div>
           <div className="felx justify-center mx-auto pb-8">
-            <button className="btn text-red-500 border-red-500 bg-white hover:bg-white hover:border-red-500">
+            <button
+              onClick={handleGoogleLogin}
+              className="btn text-red-500 border-red-500 bg-white hover:bg-white hover:border-red-500"
+            >
               <FcGoogle></FcGoogle>
               <span>Google</span>
             </button>

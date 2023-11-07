@@ -92,7 +92,7 @@ const Navbar = () => {
                 <div tabIndex={0} className="avatar m-1">
                   <div className="w-9 rounded-full ring ring-secondary ring-offset-pink-500 ring-offset-2">
                     {user.photoURL ? (
-                      <img src={user?.photoURL} />
+                      <img src={user.photoURL} />
                     ) : (
                       <img src="https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg" />
                     )}
