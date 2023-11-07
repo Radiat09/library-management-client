@@ -17,6 +17,9 @@ const Sidebar = () => {
                 )}
               </div>
             </div>
+            <p className="whitespace-nowrap font-bold text-red-700 text-lg">
+              {user.displayName}
+            </p>
             <button
               className="btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm w-full"
               onClick={logout}

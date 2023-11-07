@@ -100,11 +100,14 @@ const Navbar = () => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box  w-24"
+                  className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box  "
                 >
                   {/* <li>
                     <NavLink to="/profile">Profile</NavLink>
                   </li> */}
+                  <li className="whitespace-nowrap font-bold text-red-700 text-lg">
+                    {user.displayName}
+                  </li>
                   <li>
                     <button
                       className="btn bg-red-500 hover:text-red-500 hover:border-red-500 text-white btn-sm rounded-none"

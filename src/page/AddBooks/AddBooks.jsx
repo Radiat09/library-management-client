@@ -50,8 +50,8 @@ const AddBooks = () => {
   return (
     <Container>
       <div className="min-h-[70vh]  my-40">
-        <div className="bg-red-700  rounded py-20 px-1 md:px-10 lg:px-32">
-          <h2 className=" text-5xl font-bold text-center mb-10 text-white">
+        <div className="bg-red-700  rounded  py-20 px-4 md:px-10 lg:px-32">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-10 text-white">
             ADD A BOOK
           </h2>
           <div>
@@ -143,7 +143,7 @@ const AddBooks = () => {
                       {...register("description")}
                       type="text"
                       placeholder="Enter short description"
-                      className="w-full  p-1 md:p-3 rounded-md"
+                      className="w-full  p-3 rounded-md"
                     />
                   </div>
                 </div>
@@ -159,7 +159,7 @@ const AddBooks = () => {
                     {...register("photo")}
                     type="text"
                     placeholder="Enter photo URL"
-                    className="w-full  p-1 md:p-3 rounded-md"
+                    className="w-full  p-3 rounded-md"
                   />
                 </div>
                 <input

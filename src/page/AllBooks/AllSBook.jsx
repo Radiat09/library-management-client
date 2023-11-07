@@ -5,7 +5,7 @@ const AllSBook = ({ book }) => {
   const { _id, bookName, authorName, category, quantity, rating, photoUrl } =
     book;
   return (
-    <div className="card lg:card-side bg-base-100 h-[320px] shadow-2xl rounded-none gap-2">
+    <div className="card lg:card-side bg-base-100 lg:h-[320px] px-1 shadow-2xl rounded-none gap-2">
       <figure>
         <img
           src={photoUrl}
