@@ -28,7 +28,7 @@ const AddBooks = () => {
     // console.log(book);
     const toastId = toast.loading("Adding...");
     try {
-      axi.post("/books", book).then((res) => {
+      axi.post("/books", book, { withCredentials: true }).then((res) => {
         console.log(res.status);
         if (res.status === 200) {
           toast.success("Added", { id: toastId });

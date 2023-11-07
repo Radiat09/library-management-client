@@ -53,18 +53,27 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const xyz = onAuthStateChanged(auth, (currentUser) => {
+      const userEmail = currentUser?.email || user?.email;
       setUser(currentUser);
       setIsLoading(false);
       // console.log(currentUser);
       // Give token to user
+      const loggedUser = { email: userEmail };
       if (currentUser) {
-        const loggedUser = { email: currentUser.email };
         axios
           .post("http://localhost:9000/jwt", loggedUser, {
             withCredentials: true,
           })
           .then((res) => {
             console.log("from token", res.data);
+          });
+      } else {
+        axios
+          .post("http://localhost:9000/logout", loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
           });
       }
     });

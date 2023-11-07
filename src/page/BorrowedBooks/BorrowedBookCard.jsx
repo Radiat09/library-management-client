@@ -32,7 +32,7 @@ const BorrowedBookCard = ({ book, refetch }) => {
   };
 
   return (
-    <div className="flex flex-col justify-between gap-3 shadow-2xl h-[300px]">
+    <div className="flex flex-col justify-between gap-3 shadow-2xl h-[350px]">
       <div className="flex gap-3">
         <div className="flex justify-center items-center">
           <img

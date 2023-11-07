@@ -40,12 +40,12 @@ const UpdateBook = () => {
       photoUrl,
       description,
     };
-    console.log(book);
+    // console.log(book);
     const toastId = toast.loading("updating...");
 
     try {
       axi.put(`/books/${id}`, book).then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.modifiedCount > 0) {
           // console.log(res.data.modifiedCount);
           toast.success("Updated", { id: toastId });
@@ -115,9 +115,6 @@ const UpdateBook = () => {
                       className="select select-bordered w-full p-3 border-none "
                       name="category"
                     >
-                      {/* <option defaultValue={defaultBookData?.category} selected>
-                        {defaultBookData?.category}
-                      </option> */}
                       {categories?.data.map((cat, idx) => (
                         <option key={idx} value={cat.category}>
                           {cat.category}

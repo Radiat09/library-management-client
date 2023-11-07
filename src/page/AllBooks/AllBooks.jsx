@@ -8,16 +8,14 @@ const AllBooks = () => {
   const [filterV, setFilter] = useState(false);
   const axi = useAxios();
 
-  const {
-    data: allBooks,
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data: allBooks, isLoading } = useQuery({
     queryKey: ["allBooks"],
     queryFn: () => {
-      const res = axi.get("/books").then((response) => {
-        return response.data;
-      });
+      const res = axi
+        .get("/books", { withCredentials: true })
+        .then((response) => {
+          return response.data;
+        });
       return res;
     },
   });
@@ -26,7 +24,7 @@ const AllBooks = () => {
     setFilteredBook(sortedBooks);
   }, [allBooks]);
   // console.log(allBooks);
-  console.log(filteredBooks);
+  // console.log(filteredBooks);
   return (
     <div className="max-w-7xl mx-auto my-20">
       {isLoading ? (
