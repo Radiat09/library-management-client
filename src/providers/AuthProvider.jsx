@@ -10,13 +10,14 @@ import {
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../config/firebase.config";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  console.log(user);
+  // console.log(user);
   const [isLoading, setIsLoading] = useState(true);
 
   // Create new user
@@ -54,6 +55,18 @@ const AuthProvider = ({ children }) => {
     const xyz = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setIsLoading(false);
+      // console.log(currentUser);
+      // Give token to user
+      if (currentUser) {
+        const loggedUser = { email: currentUser.email };
+        axios
+          .post("http://localhost:9000/jwt", loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log("from token", res.data);
+          });
+      }
     });
 
     return () => {

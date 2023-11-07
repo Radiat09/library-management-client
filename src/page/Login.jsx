@@ -2,26 +2,20 @@ import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const [showHide, setShowHide] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { login, user, googleLogin } = useAuth();
   const navigate = useNavigate();
   const passwordValidator = /(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-])/;
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
-  const onSubmit = async (data) => {
-    setEmail(data.email);
-    setPassword(data.password);
+  const handlelLogin = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
     // console.log(email, password);
 
     if (password.length < 6) {
@@ -62,7 +56,7 @@ const Login = () => {
           <h1 className="text-5xl font-bold text-red-500">Login now!</h1>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form className="card-body pb-0" onSubmit={handleSubmit(onSubmit)}>
+          <form className="card-body pb-0" onSubmit={handlelLogin}>
             {/* register your input into the hook by invoking the "register" function */}
             <div className="w-full">
               <label className="label">
@@ -72,7 +66,7 @@ const Login = () => {
                 placeholder="Your email..."
                 className="input input-bordered w-full"
                 // defaultValue="demo@demo.com"
-                {...register("email", { required: true })}
+                name="email"
               />
             </div>
             {/* include validation with required or other standard HTML validation rules */}
@@ -85,7 +79,7 @@ const Login = () => {
                 placeholder="Your password..."
                 // defaultValue="demodemo"
                 className="input input-bordered w-full"
-                {...register("password", { required: true })}
+                name="password"
               />
               <span
                 className="absolute bottom-4 right-6 md:right-10 lg:right-5   2xl:right-10"
@@ -94,8 +88,6 @@ const Login = () => {
                 {showHide ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
               </span>
             </div>
-            {/* errors will return when field validation fails  */}
-            {errors.exampleRequired && <span>This field is required</span>}
             <div className="form-control mt-6">
               <button
                 type="submit"

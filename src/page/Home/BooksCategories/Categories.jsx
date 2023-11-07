@@ -35,7 +35,7 @@ const Categories = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
-            {categories?.data.map((cate, idx) => (
+            {categories?.data?.map((cate, idx) => (
               <CategoryCard key={idx} cate={cate}></CategoryCard>
             ))}
           </div>

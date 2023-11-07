@@ -1,13 +1,10 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
 
 const BorrowedBookCard = ({ book, refetch }) => {
   const {
     _id,
-    displayName,
-    userEmail,
     returnDate,
     BorrowedDate,
     category,
@@ -21,7 +18,7 @@ const BorrowedBookCard = ({ book, refetch }) => {
 
   const handleReturn = () => {
     const newQuantity = parseInt(quantity) + 1;
-    console.log(newQuantity);
+    // console.log(newQuantity);
     axi.delete(`borrowedbooks/${_id}`).then((res) => {
       // console.log(res);
       if (res.data.deletedCount > 0) {
@@ -66,7 +63,7 @@ const BorrowedBookCard = ({ book, refetch }) => {
         </div>
       </div>
       <button
-        onClick={() => handleReturn()}
+        onClick={handleReturn}
         className="btn btn-secondary btn-outline w-full rounded-none p-1"
       >
         Return
