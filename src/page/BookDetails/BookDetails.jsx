@@ -84,9 +84,9 @@ const BookDetails = () => {
         });
         toast.success("Borrow Successfull");
         e.target.returnDate.value = "";
-        location.reload(true);
       }
     });
+    location.reload(true);
   };
 
   // console.log(book);

@@ -15,7 +15,7 @@ const CategoryCard = ({ cate }) => {
       <div className="card-body">
         <h2 className="text-2xl font-bold text-center">{cate?.category}</h2>
         <div className="card-actions justify-center">
-          <Link to={`/category/${cate?.category}`}>
+          <Link to={`/category/${cate.category}`}>
             <button className="btn btn-outline text-red-600 border-red-600 hover:bg-red-600 hover:border-red-600 text-xl rounded-none">
               See Library
             </button>

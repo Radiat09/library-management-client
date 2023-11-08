@@ -7,7 +7,9 @@ const Categories = () => {
   const axi = useAxios();
   const getCategories = async () => {
     const res = await axi.get("/categories");
-    return res;
+    console.log(res.data);
+
+    return res.data;
   };
   const { data: categories, isLoading } = useQuery({
     queryKey: ["categories"],
@@ -35,9 +37,10 @@ const Categories = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
-            {categories?.data?.map((cate, idx) => (
-              <CategoryCard key={idx} cate={cate}></CategoryCard>
-            ))}
+            {categories &&
+              categories.map((cate, idx) => (
+                <CategoryCard key={idx} cate={cate}></CategoryCard>
+              ))}
           </div>
         )}
       </div>

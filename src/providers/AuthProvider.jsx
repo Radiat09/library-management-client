@@ -61,17 +61,25 @@ const AuthProvider = ({ children }) => {
       const loggedUser = { email: userEmail };
       if (currentUser) {
         axios
-          .post("http://localhost:9000/jwt", loggedUser, {
-            withCredentials: true,
-          })
+          .post(
+            "https://library-management-server-five.vercel.app/jwt",
+            loggedUser,
+            {
+              withCredentials: true,
+            }
+          )
           .then((res) => {
             console.log("from token", res.data);
           });
       } else {
         axios
-          .post("http://localhost:9000/logout", loggedUser, {
-            withCredentials: true,
-          })
+          .post(
+            "https://library-management-server-five.vercel.app/logout",
+            loggedUser,
+            {
+              withCredentials: true,
+            }
+          )
           .then((res) => {
             console.log(res.data);
           });

@@ -10,9 +10,7 @@ const BorrowedBooks = () => {
   const { user } = useAuth();
 
   const getBorrowedBooks = async () => {
-    const res = await axi.get(`/borrowedbooks?email=${user?.email}`, {
-      withCredentials: true,
-    });
+    const res = await axi.get(`/borrowedbooks?email=${user.email}`);
     return res;
   };
   const {

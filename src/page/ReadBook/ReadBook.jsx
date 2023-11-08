@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import { useParams } from "react-router-dom";
 import Rating from "react-rating";

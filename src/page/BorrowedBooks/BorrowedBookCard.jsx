@@ -19,16 +19,20 @@ const BorrowedBookCard = ({ book, refetch }) => {
   const handleReturn = () => {
     const newQuantity = parseInt(quantity) + 1;
     // console.log(newQuantity);
-    axi.delete(`borrowedbooks/${_id}`).then((res) => {
-      // console.log(res);
-      if (res.data.deletedCount > 0) {
-        axi.patch(`/books/${oldId}`, { quantity: newQuantity }).then((res) => {
-          console.log(res);
-        });
-        toast.success("Book returned");
-        refetch();
-      }
-    });
+    axi
+      .delete(`borrowedbooks/${_id}`, { withCredentials: true })
+      .then((res) => {
+        // console.log(res);
+        if (res.data.deletedCount > 0) {
+          axi
+            .patch(`/books/${oldId}`, { quantity: newQuantity })
+            .then((res) => {
+              console.log(res);
+            });
+          toast.success("Book returned");
+          refetch();
+        }
+      });
   };
 
   return (

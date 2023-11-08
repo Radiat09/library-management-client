@@ -22,7 +22,7 @@ const PrivateRoute = ({ children }) => {
     );
   }
 
-  if (!isLoading && !user?.email) {
+  if (!user) {
     return <Navigate to="/login" />;
   }
 

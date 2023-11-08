@@ -7,7 +7,7 @@ import { FaArrowRight } from "react-icons/fa";
 const ReadLatestNews = () => {
   // const [latestNews, setLatestNews] = useState([]);
   const getLatestNews = async () => {
-    const res = await axios.get("./readlatestnews.json");
+    const res = await axios.get("/readlatestnews.json");
     return res;
   };
   const { data, isLoading } = useQuery({

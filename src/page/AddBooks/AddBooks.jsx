@@ -2,11 +2,20 @@ import { useForm } from "react-hook-form";
 import Container from "../../components/ui/Container";
 import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 const AddBooks = () => {
+  const [categories, setCategories] = useState([]);
   const { register, handleSubmit } = useForm();
   const axi = useAxios();
+
+  useEffect(() => {
+    axi.get("/categories?query=category").then((res) => {
+      console.log("From Add Book", res);
+      setCategories(res.data);
+    });
+  }, [axi]);
+
   const onSubmit = async (data) => {
     const bookName = data.bookName;
     const authorName = data.authorName;
@@ -28,8 +37,8 @@ const AddBooks = () => {
     // console.log(book);
     const toastId = toast.loading("Adding...");
     try {
-      axi.post("/books", book, { withCredentials: true }).then((res) => {
-        console.log(res.status);
+      axi.post("/books", book).then((res) => {
+        // console.log(res?.status);
         if (res.status === 200) {
           toast.success("Added", { id: toastId });
         }
@@ -39,14 +48,6 @@ const AddBooks = () => {
     }
   };
 
-  const getCategories = async () => {
-    const res = await axi.get("/categories?query=category");
-    return res;
-  };
-  const { data: categories } = useQuery({
-    queryKey: ["categories"],
-    queryFn: getCategories,
-  });
   return (
     <Container>
       <div className="min-h-[70vh]  my-40">
@@ -95,7 +96,7 @@ const AddBooks = () => {
                       className="select select-bordered w-full p-3 border-none "
                       {...register("category")}
                     >
-                      {categories?.data.map((cat, idx) => (
+                      {categories?.map((cat, idx) => (
                         <option key={idx} value={cat.category}>
                           {cat.category}
                         </option>
