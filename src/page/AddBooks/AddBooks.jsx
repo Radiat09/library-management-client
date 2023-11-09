@@ -41,6 +41,7 @@ const AddBooks = () => {
         // console.log(res?.status);
         if (res.status === 200) {
           toast.success("Added", { id: toastId });
+        
         }
       });
     } catch (err) {

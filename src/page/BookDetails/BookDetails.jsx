@@ -79,14 +79,14 @@ const BookDetails = () => {
       // console.log(res);
       if (res.status === 200) {
         axi.patch(`/books/${id}`, { quantity: quantity }).then((res) => {
-          console.log(res);
+          // console.log(res);
           refetch();
         });
         toast.success("Borrow Successfull");
         e.target.returnDate.value = "";
       }
     });
-    location.reload(true);
+    // location.reload(true);
   };
 
   // console.log(book);

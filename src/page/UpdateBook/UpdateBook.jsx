@@ -7,11 +7,13 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const UpdateBook = () => {
+  const [categories, setCategories] = useState([]);
   const axi = useAxios();
   const { id } = useParams();
   // console.log(id);
   const [defaultBookData, setDefaultBookData] = useState([]);
 
+  console.log(defaultBookData.category);
   useEffect(() => {
     axi.get(`/books/${id}`).then((res) => {
       setDefaultBookData(res.data);
@@ -56,14 +58,21 @@ const UpdateBook = () => {
     }
   };
 
-  const getCategories = async () => {
-    const res = await axi.get("/categories?query=category");
-    return res;
-  };
-  const { data: categories } = useQuery({
-    queryKey: ["categories"],
-    queryFn: getCategories,
-  });
+  useEffect(() => {
+    axi.get("/categories?query=category").then((res) => {
+      console.log("From Add Book", res);
+      setCategories(res.data);
+    });
+  }, [axi]);
+
+  // const getCategories = async () => {
+  //   const res = await axi.get("/categories?query=category");
+  //   return res;
+  // };
+  // const { data: categories } = useQuery({
+  //   queryKey: ["categories"],
+  //   queryFn: getCategories,
+  // });
 
   return (
     <Container>
@@ -115,11 +124,12 @@ const UpdateBook = () => {
                       className="select select-bordered w-full p-3 border-none "
                       name="category"
                     >
-                      {categories?.data.map((cat, idx) => (
-                        <option key={idx} value={cat.category}>
-                          {cat.category}
-                        </option>
-                      ))}
+                      {categories &&
+                        categories?.map((cat, idx) => (
+                          <option key={idx} value={cat.category}>
+                            {cat.category}
+                          </option>
+                        ))}
                     </select>
                   </div>
                 </div>

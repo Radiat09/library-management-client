@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 const AllBooks = () => {
   const [filteredBooks, setFilteredBook] = useState([]);
   const [filterV, setFilter] = useState(false);
+  console.log(filterV);
   const axi = useAxios();
 
   const { data: allBooks, isLoading } = useQuery({
@@ -43,10 +44,10 @@ const AllBooks = () => {
         <div>
           <div className="flex justify-end mb-2">
             <button
-              onClick={() => setFilter(true)}
+              onClick={() => setFilter(!filterV)}
               className="btn btn-accent text-white btn-sm"
             >
-              Sort by In Stock
+              {filterV ? "Reset sort" : "Sort by In Stock"}
             </button>
           </div>
           {filterV ? (
