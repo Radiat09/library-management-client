@@ -1,7 +1,14 @@
-Live Link :>:https://library-management-rid.web.app/
+# Library Management(Livaro Li)
 
-\***\*\*\*\*\*\*\***///**\*\***\*\***\*\***
-/////Website Features:**\*\*\***
+[Live Link](https://library-management-rid.web.app/)<br/>
+[Server Repository](https://github.com/Radiat09/library-management-server)
+
+
+## Project Summary
+A Book borrowing website where a user can borrow and return any books that are in stock
+
+## Website Features:
+
 •>In some form cases REACT HOOK FORM is used.
 
 •>Axios Interceptors used in use axios hook.
